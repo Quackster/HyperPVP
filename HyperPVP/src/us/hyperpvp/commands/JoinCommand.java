@@ -60,8 +60,7 @@ public class JoinCommand implements CommandExecutor {
 			return true;
 		}
 
-		if (rank >= 3) {
-
+		if (player.isOp() || rank >= 1) {
 			if (args.length == 1) {
 				HyperPVP.getMap().joinGame(player, args[0]);
 			} else {

@@ -61,7 +61,7 @@ public class InventoryListener implements Listener {
 
 			}
 
-			if (rank >= 3 && event.getCurrentItem().hasItemMeta() && 
+			if (rank >= 2 && event.getCurrentItem().hasItemMeta() &&
 					event.getCurrentItem().getItemMeta().getDisplayName().endsWith(" Team") && HyperPVP.getMap().getType() != GameType.FFA) {
 
 				String team = event.getCurrentItem().getItemMeta().getDisplayName().substring(6).split(" ")[0];
