@@ -1,0 +1,42 @@
+Settings:
+  World: suburbruins
+  Name: Suburban Ruins
+  Mode: FFA
+  X: 18.0
+  Y: 59.0
+  Z: -27.0
+  Minutes: 10
+  MaxPerTeam: '10'
+  Features:
+  - ''
+  Authors:
+  - Quackdot
+  Teams:
+  - GOLD
+  Spawns:
+  - GOLD,16,41,22
+  - GOLD,-3,42,-12
+  - GOLD,15,44,-4
+  - GOLD,-16,41,19
+  Items:
+  - IRON_SWORD,1
+  - BOW,1|ARROW_INFINITE,1
+  - IRON_AXE,1
+  - IRON_PICKAXE,1
+  - LOG,64
+  - GLASS,64
+  - COOKED_BEEF,12
+  - GOLDEN_APPLE,3
+  - ARROW,1
+  Regions:
+    '1':
+      TeamWhitelist: ''
+      Blocks: ''
+      Alert: You have reached the end of the map.
+      Type: MAP
+      MaxX: 41
+      MaxY: 78
+      MaxZ: 41
+      MinX: -39
+      MinY: -9001
+      MinZ: -71

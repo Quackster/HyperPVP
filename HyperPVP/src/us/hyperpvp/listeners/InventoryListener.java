@@ -74,15 +74,11 @@ public class InventoryListener implements Listener {
 				HyperPVP.getMap().joinGame(player, team.toLowerCase());
 
 			} else if ( event.getCurrentItem().hasItemMeta() && event.getCurrentItem().getItemMeta().getDisplayName().endsWith("Auto Join")) {
-
 				HyperPVP.getMap().joinGame(player, null);
 			}
 
 			event.setCancelled(true);
 			return;
-
-		} else if (inventoryView.getTitle().contains("What is HyperPVP?") && event.getCurrentItem() != null) {
-
 
 		} else {
 			if (!HyperPVP.hasMatchBeenAnnounced()) {

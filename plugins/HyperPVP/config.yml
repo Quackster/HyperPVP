@@ -1,0 +1,15 @@
+MySQL:
+  Hostname: localhost
+  Username: root
+  Password: 123
+  Database: hyperpvp
+Server: Thor
+Broadcast:
+  Interval: 300
+  Prefix: '<GRAY>[<AQUA><BOLD><ITALIC>TIP<RESET><GRAY>] '
+  Messages:
+  - Type <AQUA>/join<GRAY> to play a game.
+  - View your stats at <AQUA>hyperpvp.us/profile/{name}
+  - Use <AQUA>/report<GRAY> to report a misbehaving player.
+  - Our website is <AQUA>hyperpvp.us
+  - Visit our forum <AQUA>hyperpvp.us/forum

@@ -1,0 +1,66 @@
+Settings:
+  World: trenchwarfare
+  Name: Trench Warfare
+  Mode: TDM
+  X: 70
+  Y: 73
+  Z: 27
+  Minutes: 20
+  MaxPerTeam: '10'
+  Features:
+  - ''
+  Authors:
+  - Quackdot
+  Teams:
+  - BLUE
+  - DARK_RED
+  Spawns:
+  - DARK_RED,14,58,-4
+  - BLUE,130,58,-0
+  Items:
+  - STONE_SWORD,1
+  - BOW,1
+  - STONE_AXE,1
+  - STONE_PICKAXE,1
+  - LOG,64
+  - GLASS,64
+  - COOKED_BEEF,12
+  - GOLDEN_APPLE,3
+  - ARROW,32
+  
+  Regions:
+    '1':
+      TeamWhitelist: ''
+      Blocks: ''
+      Alert: You have reached the end of the map.
+      Type: MAP
+      MaxX: 146
+      MaxY: 93
+      MaxZ: 41
+      MinX: -8
+      MinY: -900001
+      MinZ: -32
+    '2':
+      TeamWhitelist: 
+      - DARK_RED
+      Blocks: ''
+      Alert: You cannot enter red teams spawn.
+      Type: TEAM
+      MaxX: 10
+      MaxY: 67
+      MaxZ: 4
+      MinX: 18
+      MinY: 57
+      MinZ: -11
+    '3':
+      TeamWhitelist: 
+      - BLUE
+      Blocks: ''
+      Alert: You cannot enter blue teams spawn.
+      Type: TEAM
+      MaxX: 136
+      MaxY: 67
+      MaxZ: -8
+      MinX: 126
+      MinY: 57
+      MinZ: 5

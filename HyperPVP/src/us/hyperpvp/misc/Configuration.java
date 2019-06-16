@@ -102,7 +102,8 @@ public class Configuration {
 			messages.add("Use <AQUA>/report<GRAY> to report a misbehaving player.");
 			messages.add("Our website is <AQUA>hyperpvp.us");
 			messages.add("Visit our forum <AQUA>hyperpvp.us/forum");
-			
+
+			mConfig.addDefault("Broadcast.Interval", 300);
 			mConfig.addDefault("Broadcast.Prefix", "<GRAY>[<AQUA><BOLD><ITALIC>TIP<RESET><GRAY>] ");
 			mConfig.addDefault("Broadcast.Messages", messages);
 			

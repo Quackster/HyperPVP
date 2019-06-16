@@ -53,7 +53,7 @@ public class BlockListener implements Listener {
 			return;
 		}
 
-		if ((HyperPVP.isSpectator(event.getPlayer()) || HyperPVP.isCycling()) && !event.getPlayer().isOp()) {
+		if (!event.getPlayer().isOp() && (HyperPVP.isSpectator(event.getPlayer()) || HyperPVP.isCycling())) {
 
 			/*if (!HyperPVP.isCycling()) {
 				event.getPlayer().sendMessage(ChatColor.ITALIC + "" + ChatColor.GRAY + "Please type " + ChatColor.GOLD + "/join" + ChatColor.ITALIC + "" + ChatColor.GRAY +  " to place blocks!");
@@ -200,14 +200,15 @@ public class BlockListener implements Listener {
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
 
-		if ((HyperPVP.isSpectator(event.getPlayer()) || HyperPVP.isCycling()) && !event.getPlayer().isOp()) {
+		if (!event.getPlayer().isOp() && (HyperPVP.isSpectator(event.getPlayer()) || HyperPVP.isCycling())) {
 
 			/*if (!HyperPVP.isCycling()) {
-				event.getPlayer().sendMessage(ChatColor.ITALIC + "" + ChatColor.GRAY + "Please type " + ChatColor.GOLD + "/join" + ChatColor.ITALIC + "" + ChatColor.GRAY +  " to break blocks!");
+				event.getPlayer().sendMessage(ChatColor.ITALIC + "" + ChatColor.GRAY + "Please type " + ChatColor.GOLD + "/join" + ChatColor.ITALIC + "" + ChatColor.GRAY +  " to place blocks!");
 			}*/
 			event.setCancelled(true);
 
 			return;
+
 		}
 
 

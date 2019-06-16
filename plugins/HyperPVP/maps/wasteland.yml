@@ -1,0 +1,65 @@
+Settings:
+  World: wasteland
+  Name: Wasteland
+  Mode: TDM
+  X: 3.0
+  Y: 59.0
+  Z: -17.0
+  Minutes: 10
+  MaxPerTeam: '10'
+  Features:
+  - 'tntarrows'
+  Authors:
+  - Quackdot
+  Teams:
+  - BLUE
+  - DARK_RED
+  Spawns:
+  - DARK_RED,-7,33,-43
+  - BLUE,16,33,8
+  Items:
+  - IRON_SWORD,1
+  - BOW,1|ARROW_INFINITE,1
+  - IRON_AXE,1
+  - IRON_PICKAXE,1
+  - LOG,64
+  - GLASS,64
+  - COOKED_BEEF,12
+  - GOLDEN_APPLE,3
+  - ARROW,1
+  Regions:
+    '1':
+      TeamWhitelist: ''
+      Blocks: ''
+      Alert: You have reached the end of the map.
+      Type: MAP
+      MaxX: 41
+      MaxY: 71
+      MaxZ: 41
+      MinX: -39
+      MinY: -900001
+      MinZ: -71
+    '2':
+      TeamWhitelist: 
+      - DARK_RED
+      Blocks: ''
+      Alert: You cannot enter red teams spawn.
+      Type: TEAM
+      MaxX: -6
+      MaxY: 36
+      MaxZ: -39
+      MinX: -14
+      MinY: 30
+      MinZ: -49
+    '3':
+      TeamWhitelist: 
+      - BLUE
+      Blocks: ''
+      Alert: You cannot enter blue teams spawn.
+      Type: TEAM
+      MaxX: 22
+      MaxY: 36
+      MaxZ: 13
+      MinX: 14
+      MinY: 30
+      MinZ: 3

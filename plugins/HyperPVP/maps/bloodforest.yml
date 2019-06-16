@@ -88,7 +88,7 @@ Settings:
       TeamWhitelist: ''
       Blocks:
       - CHEST
-      - CRAFTING_TABLE
+      - WORKBENCH
       Alert: ''
       Type: BLOCK_PLACE_DESTORY
       MaxX: 80
