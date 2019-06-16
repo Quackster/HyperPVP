@@ -63,17 +63,17 @@ public class Session extends OverideValue {
 	private Integer userId;
 
 	public Session(Player player) {
-
-		try {
-			this.userId = HyperPVP.getStorage().readInt32("SELECT id FROM users WHERE uuid = '" + player.getUniqueId() + "'");
-		} catch (SQLException e) {
-			this.userId = 0;
-		}
-
 		this.player = player;
 		this.monumentBlockCount = new ArrayList<Block>();
 		this.spawns = new HashMap<Integer, GameSpawns>();
 		this.reset();
+
+		try {
+			this.userId = HyperPVP.getStorage().readInt32("SELECT id FROM users WHERE uuid = '" + player.getUniqueId() + "'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			this.userId = 0;
+		}
 	}
 
 	public void reset() {
@@ -93,6 +93,7 @@ public class Session extends OverideValue {
 	public void updateStatistics(ScoreType type, Session from) {
 
 		if (this.userId == 0) {
+			System.out.println("User id was null");
 			return;
 		}
 
@@ -585,7 +586,6 @@ public class Session extends OverideValue {
 
 	@SuppressWarnings("deprecation")
 	public static Session addSpectator(Player player, boolean normalLeave) {
-
 		Session session = null;
 
 		if (!HyperPVP.getSessions().containsKey(player.getName())) {

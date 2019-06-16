@@ -37,15 +37,8 @@ public class CycleCommand implements CommandExecutor {
 			if (sender instanceof Player) {
 				Player player = (Player)sender;
 
-				int rank = 1;
-				
-				try {
-					rank = HyperPVP.getStorage().readInt32("SELECT rank FROM users WHERE username = '" + player.getName() + "'");	
-				} catch (SQLException e) {
-					e.printStackTrace();	
-				}
-				
-				if (rank >= 6) {
+				if (!player.isOp()) {
+					sender.sendMessage(ChatColor.RED + "Insufficient permissions to perform this action");
 					return true;
 				}
 			}
