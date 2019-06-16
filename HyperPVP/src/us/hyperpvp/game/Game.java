@@ -27,7 +27,7 @@ public class Game {
 	}
 	
 	public void reload() {
-		this.mapManager = new GameMapManager(HyperPVP.getJavaPlugin());
+		this.mapManager = new GameMapManager(HyperPVP.getPlugin());
 	}
 
 	public GameMapManager getMapManager() {

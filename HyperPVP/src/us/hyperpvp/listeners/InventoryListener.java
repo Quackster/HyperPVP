@@ -26,6 +26,7 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -42,10 +43,11 @@ public class InventoryListener implements Listener {
 		}
 
 		Player player = (Player) event.getWhoClicked();
+
 		Inventory inv = event.getInventory();
+		InventoryView inventoryView = event.getView();
 
-		if (inv.getTitle().contains("Team Selection") && event.getCurrentItem() != null) {
-
+		if (inventoryView.getTitle().contains("Team Selection") && event.getCurrentItem() != null) {
 			if (event.getCurrentItem().getType() == Material.ENCHANTED_BOOK) {
 				event.setCancelled(true);
 				return;
@@ -79,20 +81,16 @@ public class InventoryListener implements Listener {
 			event.setCancelled(true);
 			return;
 
-		} else if (inv.getTitle().contains("What is HyperPVP?") && event.getCurrentItem() != null) { 
-
+		} else if (inventoryView.getTitle().contains("What is HyperPVP?") && event.getCurrentItem() != null) {
 
 
 		} else {
-
-
 			if (!HyperPVP.hasMatchBeenAnnounced()) {
 				event.setCancelled(true);
 				return;
 			}
 
 			if (HyperPVP.getSpectators().contains(event.getWhoClicked()) && !event.getWhoClicked().isOp()) {
-
 				event.setCancelled(true);
 				return;
 

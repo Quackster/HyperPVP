@@ -59,7 +59,6 @@ public class EntityListener implements Listener {
 
 	@EventHandler
 	public void onEntityTarget(EntityTargetEvent event) {
-
 		if (event.getEntity() instanceof Player) {
 			if (HyperPVP.getSpectators().contains(((Player)event.getEntity()).getName())) {
 				event.setCancelled(true);
@@ -99,7 +98,7 @@ public class EntityListener implements Listener {
 
 			//final Player shooter = (Player) arrow.getShooter();
 
-			if (hit.getType() == Material.GLASS || hit.getType() == Material.GLOWSTONE || hit.getType() == Material.THIN_GLASS)
+			if (hit.getType() == Material.GLASS || hit.getType() == Material.GLOWSTONE || hit.getType() == Material.GLASS_PANE)
 			{
 				//this.sendBlockBreakParticles(hit, hit.getLocation());
 
@@ -109,7 +108,7 @@ public class EntityListener implements Listener {
 
 				arrow.remove();
 
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperPVP.getJavaPlugin(), new Runnable() {
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperPVP.getPlugin(), new Runnable() {
 
 					@Override
 					public void run() {

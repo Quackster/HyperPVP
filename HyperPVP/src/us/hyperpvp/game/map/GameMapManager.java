@@ -54,7 +54,7 @@ public class GameMapManager {
 
 		int i = 0;
 
-		for (File file : new File(HyperPVP.getJavaPlugin().getDataFolder().getAbsolutePath() + File.separator + "maps").listFiles()) {
+		for (File file : new File(HyperPVP.getPlugin().getDataFolder().getAbsolutePath() + File.separator + "maps").listFiles()) {
 
 			FileConfiguration conf = YamlConfiguration.loadConfiguration(file);
 

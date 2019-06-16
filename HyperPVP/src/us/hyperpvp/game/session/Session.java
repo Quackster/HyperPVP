@@ -15,20 +15,11 @@
  ******************************************************************************/
 package us.hyperpvp.game.session;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import net.minecraft.server.v1_13_R2.IChatBaseComponent;
+import net.minecraft.server.v1_13_R2.PacketPlayOutTitle;
+import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -39,16 +30,18 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
-
-import net.minecraft.server.v1_10_R1.IChatBaseComponent.ChatSerializer;
-import net.minecraft.server.v1_10_R1.PacketPlayOutTitle;
-import net.minecraft.server.v1_10_R1.PacketPlayOutTitle.EnumTitleAction;
 import us.hyperpvp.HyperPVP;
 import us.hyperpvp.game.GameSpawns;
 import us.hyperpvp.game.GameType;
 import us.hyperpvp.game.map.team.TeamMap;
 import us.hyperpvp.misc.CycleUtil;
 import us.hyperpvp.misc.OverideValue;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Session extends OverideValue {
 
@@ -147,7 +140,7 @@ public class Session extends OverideValue {
 
 	public String getItemHand(Player killed) {
 
-		if (player.getInventory().getItemInMainHand().getType() == Material.WOOD_HOE && 
+		if (player.getInventory().getItemInMainHand().getType() == Material.WOODEN_HOE &&
 				player.getInventory().getItemInMainHand().hasItemMeta() && 
 				player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().contains("Paintball Gun")) {
 			
@@ -173,10 +166,9 @@ public class Session extends OverideValue {
 	}
 
 	public void updateScoreboard(boolean update) {
-
 		Scoreboard scoreboard = player.getScoreboard();
 
-		Objective objective = scoreboard.getObjective("Leaderboard") != null ? scoreboard.getObjective("Leaderboard") : scoreboard.registerNewObjective("Leaderboard", "");
+		Objective objective = scoreboard.getObjective("Leaderboard") != null ? scoreboard.getObjective("Leaderboard") : scoreboard.registerNewObjective("Leaderboard", "", "");
 
 		if (HyperPVP.isCycling()) {
 			objective.unregister();
@@ -191,7 +183,7 @@ public class Session extends OverideValue {
 				List<Session> topPlayers = HyperPVP.getMap().getTop();
 
 				objective.unregister();
-				objective = scoreboard.getObjective("Leaderboard") != null ? scoreboard.getObjective("Leaderboard") : scoreboard.registerNewObjective("Leaderboard", "");
+				objective = scoreboard.getObjective("Leaderboard") != null ? scoreboard.getObjective("Leaderboard") : scoreboard.registerNewObjective("Leaderboard", "", "");
 				objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 				objective.setDisplayName("Leaderboard");
 
@@ -210,7 +202,7 @@ public class Session extends OverideValue {
 			} else {
 
 				objective.unregister();
-				objective = scoreboard.getObjective("Leaderboard") != null ? scoreboard.getObjective("Leaderboard") : scoreboard.registerNewObjective("Leaderboard", "");
+				objective = scoreboard.getObjective("Leaderboard") != null ? scoreboard.getObjective("Leaderboard") : scoreboard.registerNewObjective("Leaderboard", "", "");
 				objective.setDisplaySlot(DisplaySlot.SIDEBAR);;
 
 				if (HyperPVP.getMap().getType() == GameType.CONQUEST) {
@@ -264,7 +256,6 @@ public class Session extends OverideValue {
 	}
 
 	public String getDeathMessage(Player killed, EntityDamageEvent e, boolean pastTense) {
-
 		if (player == null) {
 			player = killed;
 		}
@@ -473,24 +464,20 @@ public class Session extends OverideValue {
 			Bukkit.broadcastMessage(this.getTeam().getColor() + this.player.getName() + ChatColor.GRAY + this.getDeathMessage(this.player, e, false));
 		}
 
-		Session killedSession = this;
+		final Session killedSession = this;
 		
 		if (e.getCause() != DamageCause.VOID) {
-		
 			this.isDead = true;
 			CycleUtil.visibilityStatus(false, this.player); // Hide player
 			this.player.setGameMode(GameMode.SPECTATOR);
 			this.player.playSound(this.player.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
 			this.player.teleport(this.player.getLocation().add(0, 5, 0));
 			
-			
 			new BukkitRunnable () {
-				
 				private int ticks = 10;
 				
 				@Override
 				public void run() {
-					
 					killedSession.clearTitles();
 					
 					if (HyperPVP.isCycling()) {
@@ -503,15 +490,14 @@ public class Session extends OverideValue {
 						respawnPlayer();
 						return;
 					}
-					
 
 					killedSession.sendTitle(ChatColor.RED + "You died", ChatColor.GRAY + "Respawning in " + ticks + " seconds", 20);
 					
 					ticks--;
 					
 				}
-			}.runTaskTimer(HyperPVP.getJavaPlugin(), 0, 20);
-			
+			}.runTaskTimer(HyperPVP.getPlugin(), 0, 20);
+
 		} else {
 			respawnPlayer();
 		}
@@ -522,13 +508,12 @@ public class Session extends OverideValue {
 	}
 	
 	protected void sendTitle(String title, String subTitle, int duration) {
-		
 		PacketPlayOutTitle packet = null;
 		
-		packet = new PacketPlayOutTitle(EnumTitleAction.TITLE, ChatSerializer.a("{\"text\":\"" + title + "\"}"), 0, duration, 0);
+		packet = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + title + "\"}"), 0, duration, 0);
 		((CraftPlayer) this.player).getHandle().playerConnection.sendPacket(packet);
 
-		packet = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, ChatSerializer.a("{\"text\":\"" + subTitle + "\"}"), 0, duration, 0);
+		packet = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + subTitle + "\"}"), 0, duration, 0);
 		((CraftPlayer) this.player).getHandle().playerConnection.sendPacket(packet);
 		
 	}
@@ -703,7 +688,7 @@ public class Session extends OverideValue {
 		if (!session.lastDamagedByTimer) {
 			session.lastDamagedByTimer = true;
 
-			Bukkit.getScheduler().scheduleSyncDelayedTask(HyperPVP.getJavaPlugin(), new Runnable() {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(HyperPVP.getPlugin(), new Runnable() {
 				@Override
 				public void run() {
 					session.setLastDamagedBy(null);

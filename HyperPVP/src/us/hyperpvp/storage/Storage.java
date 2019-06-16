@@ -48,7 +48,7 @@ public class Storage {
 		//this.connection.setAutoCommit(false);
 		this.makeStatement();
 		
-		this.executeDBScripts(new File(HyperPVP.getJavaPlugin().getDataFolder(), "hyperdb.sql"), this.driverStatement);
+		this.executeDBScripts(new File(HyperPVP.getPlugin().getDataFolder(), "hyperdb.sql"), this.driverStatement);
 	}
 
 	//http://www.coderanch.com/t/306966/JDBC/databases/Execute-sql-file-java

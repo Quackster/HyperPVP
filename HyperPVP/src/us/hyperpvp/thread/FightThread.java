@@ -19,11 +19,11 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import net.minecraft.server.v1_13_R2.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_10_R1.CraftServer;
 
-import net.minecraft.server.v1_10_R1.MinecraftServer;
+import org.bukkit.craftbukkit.v1_13_R2.CraftServer;
 import us.hyperpvp.HyperPVP;
 import us.hyperpvp.game.GameType;
 import us.hyperpvp.game.map.team.TeamMap;
@@ -59,11 +59,9 @@ public class FightThread extends IThread {
 		String motd = status + "<< " + ChatColor.AQUA + "[" + HyperPVP.getMap().getType().name() + "] " + HyperPVP.getMap().getMapName() + status + " >>";
 
 		try {
-
 			CraftServer craftServer = (CraftServer) Bukkit.getServer();
 			MinecraftServer server = craftServer.getServer();
 			server.setMotd(motd);
-
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

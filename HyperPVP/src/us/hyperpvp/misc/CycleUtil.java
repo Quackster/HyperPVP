@@ -35,6 +35,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.plugin.Plugin;
 import us.hyperpvp.HyperPVP;
 import us.hyperpvp.game.GameType;
 import us.hyperpvp.game.map.GameMap;
@@ -380,7 +381,7 @@ public class CycleUtil {
 			HyperPVP.getThreads().put(ThreadType.CYCLE, new CycleThread(HyperPVP.getWinningTeam(), HyperPVP.getWinningPlayer(), newMap));
 			HyperPVP.getThreads().get(ThreadType.CYCLE).start();
 
-			HyperPVP.setCallId(Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(HyperPVP.getJavaPlugin(), getCheckTask(), 0, 10));
+			HyperPVP.setCallId(Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(HyperPVP.getPlugin(), getCheckTask(), 0, 10));
 
 		} else {
 
@@ -393,7 +394,8 @@ public class CycleUtil {
 	}
 
 	public static void visibilityStatus(boolean canSee, Player toSee) {
-		
+		Plugin plugin = HyperPVP.getPlugin();
+
 		for (Session session : HyperPVP.getSessions().values()) {
 			for (Session otherSession : HyperPVP.getSessions().values()) {
 
@@ -401,27 +403,27 @@ public class CycleUtil {
 				Player otherPlayer = otherSession.getPlayer();
 				
 				if (canSee) {
-					player.showPlayer(otherPlayer);
-					otherPlayer.showPlayer(player);
+					player.showPlayer(plugin, otherPlayer);
+					otherPlayer.showPlayer(plugin, player);
 				} else {
-					player.hidePlayer(otherPlayer);
-					otherPlayer.hidePlayer(player);
+					player.hidePlayer(plugin, otherPlayer);
+					otherPlayer.hidePlayer(plugin, player);
 				}
 			}
 		}
 	}
-	
-	
+
 	public static void refreshShowHidePlayer() {
-		
+		Plugin plugin = HyperPVP.getPlugin();
+
 		for (Session session : HyperPVP.getSessions().values()) {
 			for (Session otherSession : HyperPVP.getSessions().values()) {
 
 				Player player = session.getPlayer();
 				Player otherPlayer = otherSession.getPlayer();
 
-					player.showPlayer(otherPlayer);
-					otherPlayer.showPlayer(player);
+					player.showPlayer(plugin, otherPlayer);
+					otherPlayer.showPlayer(plugin, player);
 			}
 		}
 		
@@ -432,36 +434,36 @@ public class CycleUtil {
 				Player otherPlayer = otherSession.getPlayer();
 				
 				if (otherSession.isDead()) {
-					player.hidePlayer(otherPlayer);
-					otherPlayer.hidePlayer(player);
+					player.hidePlayer(plugin, otherPlayer);
+					otherPlayer.hidePlayer(plugin, player);
 				}
 				
 				if (HyperPVP.isSpectator(player)) {
 					if (HyperPVP.isGamePlayer(otherPlayer)) {
-						otherPlayer.hidePlayer(player);
-						player.showPlayer(otherPlayer);
+						otherPlayer.hidePlayer(plugin, player);
+						player.showPlayer(plugin, otherPlayer);
 					}
 				}
 				
 				if (HyperPVP.isGamePlayer(player)) {
 					if (HyperPVP.isSpectator(otherPlayer)) {
-						player.hidePlayer(otherPlayer);
-						otherPlayer.showPlayer(player);
+						player.hidePlayer(plugin, otherPlayer);
+						otherPlayer.showPlayer(plugin, player);
 					}
 				}
 
 				if (HyperPVP.isGamePlayer(player)) {
 					if (HyperPVP.isGamePlayer(otherPlayer)) {
-						otherPlayer.showPlayer(player);
-						player.showPlayer(otherPlayer);
+						otherPlayer.showPlayer(plugin, player);
+						player.showPlayer(plugin, otherPlayer);
 					}
 				}
 
 				if (HyperPVP.isSpectator(player)) {
 					if (HyperPVP.isSpectator(otherPlayer)) {
 
-						otherPlayer.showPlayer(player);
-						player.showPlayer(otherPlayer);
+						otherPlayer.showPlayer(plugin, player);
+						player.showPlayer(plugin, otherPlayer);
 					}
 				}
 			}
@@ -469,7 +471,6 @@ public class CycleUtil {
 	}
 
 	public static void startMatch(Player client) {
-		
 		if (!HyperPVP.isGamePlayer(client)) {
 			return;
 		}

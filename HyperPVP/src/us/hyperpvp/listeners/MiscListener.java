@@ -162,7 +162,7 @@ public class MiscListener implements Listener {
 					DataOutputStream dos = new DataOutputStream(baos);
 					dos.writeUTF("Connect");
 					dos.writeUTF("lobby");
-					user.sendPluginMessage(HyperPVP.getJavaPlugin(), "BungeeCord", baos.toByteArray());
+					user.sendPluginMessage(HyperPVP.getPlugin(), "BungeeCord", baos.toByteArray());
 					baos.close();
 					dos.close();
 				}

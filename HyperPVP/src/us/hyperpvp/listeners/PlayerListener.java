@@ -15,50 +15,35 @@
  ******************************************************************************/
 package us.hyperpvp.listeners;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.DyeColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_10_R1.inventory.CraftInventoryCustom;
+import org.bukkit.*;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
-
 import us.hyperpvp.HyperPVP;
 import us.hyperpvp.game.GameType;
 import us.hyperpvp.game.map.region.Region;
 import us.hyperpvp.game.map.region.RegionType;
-import us.hyperpvp.game.map.team.TeamMap;
 import us.hyperpvp.game.map.team.TeamColor;
+import us.hyperpvp.game.map.team.TeamMap;
 import us.hyperpvp.game.session.Session;
-
 import us.hyperpvp.misc.CycleUtil;
 import us.hyperpvp.misc.Helpers;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerListener implements Listener {
 
@@ -72,9 +57,10 @@ public class PlayerListener implements Listener {
 
 			if (!HyperPVP.getStorage().entryExists("SELECT * FROM users WHERE uuid = '" + event.getPlayer().getUniqueId().toString() + "'")) {
 
-				Bukkit.broadcastMessage(ChatColor.AQUA + "Welcome " + ChatColor.DARK_AQUA + event.getPlayer().getName() + ChatColor.AQUA +" to HyperPVP!");
+				Bukkit.broadcastMessage(ChatColor.AQUA + "Welcome " + ChatColor.DARK_AQUA + event.getPlayer().getName() + ChatColor.AQUA + " to HyperPVP!");
 
-				PreparedStatement statement = HyperPVP.getStorage().queryParams("INSERT INTO users (uuid, username, last_online, email) VALUES (?, ?, ?, ?)"); {
+				PreparedStatement statement = HyperPVP.getStorage().queryParams("INSERT INTO users (uuid, username, last_online, email) VALUES (?, ?, ?, ?)");
+				{
 					statement.setString(1, event.getPlayer().getUniqueId().toString());
 					statement.setString(2, event.getPlayer().getName());
 					statement.setLong(3, (System.currentTimeMillis() / 1000L));
@@ -83,13 +69,15 @@ public class PlayerListener implements Listener {
 				}
 			}
 
-			PreparedStatement statement = HyperPVP.getStorage().queryParams("INSERT INTO servers_users (server_id, user) VALUES (?, ?)"); {
+			PreparedStatement statement = HyperPVP.getStorage().queryParams("INSERT INTO servers_users (server_id, user) VALUES (?, ?)");
+			{
 				statement.setString(1, HyperPVP.getConfiguration().getConfig().getString("Server"));
 				statement.setString(2, event.getPlayer().getName());
 				statement.execute();
-			}    
+			}
 
-			statement = HyperPVP.getStorage().queryParams("UPDATE users SET last_online = ?, username = ? WHERE uuid = ?"); {
+			statement = HyperPVP.getStorage().queryParams("UPDATE users SET last_online = ?, username = ? WHERE uuid = ?");
+			{
 				statement.setLong(1, (System.currentTimeMillis() / 1000L));
 				statement.setString(2, event.getPlayer().getName());
 				statement.setString(3, event.getPlayer().getUniqueId().toString());
@@ -106,7 +94,7 @@ public class PlayerListener implements Listener {
 		} else {
 			player.teleport(HyperPVP.getMap().getSpawn());
 		}
-		
+
 		//rplayer.setScoreboard(HyperPVP.getMap().getScoreboard());
 
 		//HyperPVP.resetSpectatorInventory(player);
@@ -127,8 +115,8 @@ public class PlayerListener implements Listener {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			MiscListener.refreshTag(p);
 		}
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(HyperPVP.getJavaPlugin(), new Runnable() {
+
+		Bukkit.getScheduler().scheduleSyncDelayedTask(HyperPVP.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
 				CycleUtil.refreshShowHidePlayer();
@@ -146,7 +134,8 @@ public class PlayerListener implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent event) {
 
 		try {
-			PreparedStatement statement = HyperPVP.getStorage().queryParams("UPDATE users SET last_online = ? WHERE uuid = ?"); {
+			PreparedStatement statement = HyperPVP.getStorage().queryParams("UPDATE users SET last_online = ? WHERE uuid = ?");
+			{
 				statement.setLong(1, (System.currentTimeMillis() / 1000L));
 				statement.setString(2, event.getPlayer().getUniqueId().toString());
 				statement.execute();
@@ -164,9 +153,9 @@ public class PlayerListener implements Listener {
 		if (HyperPVP.getTeamCycle().containsKey(player)) {
 			HyperPVP.getTeamCycle().remove(player);
 		}
-		
+
 		Session session = HyperPVP.getSession(player);
-		
+
 		if (session.isPlaying()) {
 			HyperPVP.getSession(player).leaveGame(false, false);
 		}
@@ -182,9 +171,8 @@ public class PlayerListener implements Listener {
 		event.setDeathMessage("");
 	}
 
-	@EventHandler(priority=EventPriority.NORMAL)
-	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event)
-	{
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
 		String[] split = event.getMessage().split("\\s+");
 		String command = split[0].substring(1);
 
@@ -214,7 +202,7 @@ public class PlayerListener implements Listener {
 		Player player = event.getPlayer();
 
 		Session session = HyperPVP.getSession(player);
-		
+
 		if (HyperPVP.isCycling()) {
 			event.setRespawnLocation(HyperPVP.getPreviousWorld().getRandomSpawn(player));
 		} else {
@@ -222,29 +210,30 @@ public class PlayerListener implements Listener {
 		}
 
 		CycleUtil.resetInventory(player, false);
-		
-		session.setLastDamagedBy(null);	
+
+		session.setLastDamagedBy(null);
 		session.resetKillTimer();
 
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
-
 		Player player = event.getPlayer();
 
 		if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			if (event.getItem() == null) {
+				return;
+			}
 
-			if (event.getItem() == null || event.getItem().getType() == null) {
+			if (event.getClickedBlock() == null) {
 				return;
 			}
 
 			if (event.getClickedBlock().getType() == Material.CHEST ||
-					event.getClickedBlock().getType() == Material.WORKBENCH || 
+					event.getClickedBlock().getType() == Material.CRAFTING_TABLE ||
 					event.getClickedBlock().getType() == Material.FURNACE ||
 					event.getClickedBlock().getType() == Material.ANVIL ||
-					event.getClickedBlock().getType() == Material.BURNING_FURNACE) {
+					event.getClickedBlock().getType() == Material.FURNACE) {
 
 				if (HyperPVP.isCycling()) {
 					event.setCancelled(true);
@@ -253,18 +242,20 @@ public class PlayerListener implements Listener {
 			}
 		}
 
-		if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR ) {
+		if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+			if (event.getItem() == null) {
+				return;
+			}
 
-			if (event.getItem().getType() == Material.ENCHANTED_BOOK && event.getItem().hasItemMeta() && event.getItem().getItemMeta().getDisplayName().contains("Team Selection"))
-			{
-
+			if (event.getItem().getType() == Material.ENCHANTED_BOOK && event.getItem().hasItemMeta() && event.getItem().getItemMeta().getDisplayName().contains("Team Selection")) {
 				event.setCancelled(true);
-
-				Inventory inventory = new CraftInventoryCustom(event.getPlayer(), 9, ChatColor.RESET + "Team Selection");
+				Inventory inventory = Bukkit.createInventory(event.getPlayer(), 9, ChatColor.RESET + "Team Selection");
 
 				ItemStack item = new ItemStack(Material.NETHER_STAR);
 				ItemMeta meta = item.getItemMeta();
-				meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GOLD + "" + ChatColor.BOLD + "Auto Join");
+				if (meta != null) {
+					meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GOLD + "" + ChatColor.BOLD + "Auto Join");
+				}
 
 				List<String> lore = new ArrayList<String>();
 
@@ -291,7 +282,9 @@ public class PlayerListener implements Listener {
 					lore.add(ChatColor.AQUA + "Puts you with everyone vs everyone.");
 				}
 
-				meta.setLore(lore);
+				if (meta != null) {
+					meta.setLore(lore);
+				}
 				item.setItemMeta(meta);
 
 				inventory.setItem(0, item);
@@ -309,9 +302,12 @@ public class PlayerListener implements Listener {
 						e.printStackTrace();
 					}
 
-					ItemStack teamOne = new ItemStack(Material.WOOL, 1, Helpers.getDye(TeamColor.get(one.getColor())).getData());
+					ItemStack teamOne = new ItemStack(Helpers.getDye(TeamColor.get(one.getColor())), 1);
 					ItemMeta teamOneMeta = teamOne.getItemMeta();
-					teamOneMeta.setDisplayName(ChatColor.RESET + "" + one.getColor() + "" + ChatColor.BOLD + HyperPVP.capitalize(one.getColor().name().toLowerCase().replace("_", " ").replace("dark ", "")) + " Team");
+					if (teamOneMeta != null) {
+						teamOneMeta.setDisplayName(ChatColor.RESET + "" + one.getColor() + "" + ChatColor.BOLD + HyperPVP.capitalize(one.getColor().name().toLowerCase().replace("_", " ").replace("dark ", "")) + " Team");
+					}
+
 					lore.clear();
 					//wolf
 					if (rank == 2) {
@@ -321,7 +317,7 @@ public class PlayerListener implements Listener {
 						//spyder
 						lore.add(ChatColor.GOLD + "Thank you for buying premium!");
 						lore.add(ChatColor.GREEN + "You can join any teams!");
-					} else { 
+					} else {
 						lore.add(ChatColor.GOLD + "Premium members can pick their teams!");
 						lore.add(ChatColor.AQUA + "Buy premium at " + ChatColor.GREEN + "hyperpvp.us/shop");
 					}
@@ -329,7 +325,7 @@ public class PlayerListener implements Listener {
 					teamOne.setItemMeta(teamOneMeta);
 					inventory.setItem(1, teamOne);
 
-					ItemStack teamTwo = new ItemStack(Material.WOOL, 1, Helpers.getDye(TeamColor.get(two.getColor())).getData());
+					ItemStack teamTwo = new ItemStack(Helpers.getDye(TeamColor.get(two.getColor())), 1);
 					ItemMeta teamTwoMeta = teamOne.getItemMeta();
 					teamOneMeta.setDisplayName(ChatColor.RESET + "" + two.getColor() + "" + ChatColor.BOLD + HyperPVP.capitalize(two.getColor().name().toLowerCase().replace("_", " ").replace("dark ", "")) + " Team");
 					lore.clear();
@@ -341,7 +337,7 @@ public class PlayerListener implements Listener {
 						//spyder
 						lore.add(ChatColor.GOLD + "Thank you for buying premium!");
 						lore.add(ChatColor.GREEN + "You can join any teams!");
-					} else { 
+					} else {
 						lore.add(ChatColor.GOLD + "Premium members can pick their teams!");
 						lore.add(ChatColor.AQUA + "Buy premium at " + ChatColor.GREEN + "hyperpvp.us/shop");
 					}
@@ -352,7 +348,7 @@ public class PlayerListener implements Listener {
 				} else {
 
 					TeamMap one = HyperPVP.getMap().getTeams().get(0);
-					ItemStack teamOne = new ItemStack(Material.WOOL, 1, Helpers.getDye(TeamColor.get(one.getColor())).getData());
+					ItemStack teamOne = new ItemStack(Helpers.getDye(TeamColor.get(one.getColor())), 1);
 					ItemMeta teamOneMeta = teamOne.getItemMeta();
 					teamOneMeta.setDisplayName(ChatColor.RESET + "" + one.getColor() + "" + ChatColor.BOLD + HyperPVP.capitalize(one.getColor().name().toLowerCase().replace("_", " ").replace("dark ", "")) + " Team");
 					lore.clear();
@@ -367,11 +363,9 @@ public class PlayerListener implements Listener {
 
 			}
 
-			if (event.getItem().getType() == Material.ENCHANTED_BOOK && event.getItem().hasItemMeta() && event.getItem().getItemMeta().getDisplayName().contains("What is HyperPVP?"))
-			{
+			if (event.getItem().getType() == Material.ENCHANTED_BOOK && event.getItem().hasItemMeta() && event.getItem().getItemMeta().getDisplayName().contains("What is HyperPVP?")) {
 				event.setCancelled(true);
-
-				Inventory inventory = new CraftInventoryCustom(event.getPlayer(), 9, "About HyperPVP");
+				Inventory inventory = Bukkit.createInventory(event.getPlayer(), 9, "About HyperPVP");
 
 				List<String> lore = new ArrayList<String>();
 
@@ -404,7 +398,7 @@ public class PlayerListener implements Listener {
 				DTM.setItemMeta(DTMMeta);
 				inventory.setItem(2, DTM);
 
-				ItemStack FFA = new ItemStack(Material.WOOL, 1, DyeColor.ORANGE.getData());
+				ItemStack FFA = new ItemStack(Material.ORANGE_WOOL, 1);
 				ItemMeta FFAMeta = rules.getItemMeta();
 				FFAMeta.setDisplayName(ChatColor.RESET + "" + ChatColor.WHITE + "" + ChatColor.BOLD + "What is FFA?");
 				lore.clear();
@@ -457,9 +451,12 @@ public class PlayerListener implements Listener {
 			}
 		}*/
 
+		if (event.getTo() == null) {
+			return;
+		}
+
 		if (!HyperPVP.isCycling()) {
 			for (Region region : HyperPVP.getMap().getRegions(RegionType.MAP)) {
-
 				if (!region.hasLocation(event.getTo()) && event.getTo().getWorld() == HyperPVP.getMap().getWorld()) {
 					moveBack(region.getAlert(), event);
 				}
@@ -500,15 +497,18 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerPickupItem(PlayerPickupItemEvent event) {
-		if (HyperPVP.isSpectator(event.getPlayer()) || HyperPVP.isCycling() && !event.getPlayer().isOp()) {
-			event.setCancelled(true);
+	public void onPlayerPickupItem(EntityPickupItemEvent event) {
+		if (event.getEntity() instanceof Player) {
+			Player player = (Player) event.getEntity();
+
+			if (HyperPVP.isSpectator(player) || HyperPVP.isCycling() && !player.isOp()) {
+				event.setCancelled(true);
+			}
 		}
 	}
 
 	@EventHandler
 	public void onPlayerDropItem(PlayerDropItemEvent event) {
-
 		if (HyperPVP.isSpectator(event.getPlayer()) || HyperPVP.isCycling() && !event.getPlayer().isOp()) {
 			event.setCancelled(true);
 			return;
@@ -516,7 +516,7 @@ public class PlayerListener implements Listener {
 
 		Item drop = event.getItemDrop();
 
-		if (drop.getItemStack().getType() == Material.LEATHER_BOOTS || drop.getItemStack().getType() == Material.LEATHER_HELMET || drop.getItemStack().getType() == Material.LEATHER_CHESTPLATE || drop.getItemStack().getType() == Material.LEATHER_LEGGINGS ) {
+		if (drop.getItemStack().getType() == Material.LEATHER_BOOTS || drop.getItemStack().getType() == Material.LEATHER_HELMET || drop.getItemStack().getType() == Material.LEATHER_CHESTPLATE || drop.getItemStack().getType() == Material.LEATHER_LEGGINGS) {
 			event.setCancelled(true);
 		}
 	}
@@ -539,13 +539,11 @@ public class PlayerListener implements Listener {
 
 			if (left <= one && left > two) {
 				status = ChatColor.GREEN;
-			}
-			else if (left <= two && left > three) {
+			} else if (left <= two && left > three) {
 				status = ChatColor.GOLD;
-			}
-			else if (left <= three) {
+			} else if (left <= three) {
 				status = ChatColor.RED;
-			} 
+			}
 
 			String motd = status + "<< " + ChatColor.AQUA + "[" + HyperPVP.getMap().getType().name() + "] " + HyperPVP.getMap().getMapName() + status + " >>";
 
@@ -564,32 +562,34 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onPressurePlateStep(PlayerInteractEvent e)
-	{
+	public void onPressurePlateStep(PlayerInteractEvent e) {
 		if (HyperPVP.isSpectator(e.getPlayer()) || HyperPVP.isCycling() || !HyperPVP.hasMatchBeenAnnounced()) {
-			if (e.getAction().equals(Action.PHYSICAL) && e.getClickedBlock().getType() == Material.STONE_PLATE) {
-				e.setCancelled(true);
+			if (e.getClickedBlock() != null) {
+
+				if (e.getAction().equals(Action.PHYSICAL) && e.getClickedBlock().getType() == Material.STONE_PRESSURE_PLATE) {
+					e.setCancelled(true);
+				}
+				return;
+
 			}
-			return;
 		}
 
 		if (!HyperPVP.getMap().getFeatures().contains("jumppreassureplate")) {
 			return;
 		}
 
-		if (e.getAction().equals(Action.PHYSICAL) && e.getClickedBlock().getType() == Material.STONE_PLATE) {
+		if (e.getClickedBlock() != null) {
+			if (e.getAction().equals(Action.PHYSICAL) && e.getClickedBlock().getType() == Material.STONE_PRESSURE_PLATE) {
+				Player p = e.getPlayer();
 
-			Player p = e.getPlayer();
+				double strength = 2.0;
+				double up = 2.0;
 
-			double strength = 2.0;
-			double up = 2.0;
-
-			Vector v = p.getLocation().getDirection().multiply(strength).setY(up);
-			p.setVelocity(v);
-			p.playSound(p.getLocation(), Sound.ENTITY_ENDERDRAGON_FLAP, 10.0F, 2.0F);
-			e.setCancelled(true);
+				Vector v = p.getLocation().getDirection().multiply(strength).setY(up);
+				p.setVelocity(v);
+				p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_FLAP, 10.0F, 2.0F);
+				e.setCancelled(true);
+			}
 		}
 	}
-
-
 }

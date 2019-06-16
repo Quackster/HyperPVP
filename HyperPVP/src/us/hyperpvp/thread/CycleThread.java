@@ -15,20 +15,19 @@
  ******************************************************************************/
 package us.hyperpvp.thread;
 
-import java.sql.PreparedStatement;
-import java.util.Map.Entry;
-
+import net.minecraft.server.v1_13_R2.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_10_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_13_R2.CraftServer;
 import org.bukkit.entity.Player;
-
-import net.minecraft.server.v1_10_R1.MinecraftServer;
 import us.hyperpvp.HyperPVP;
 import us.hyperpvp.game.map.GameMap;
-import us.hyperpvp.game.map.team.TeamMap;
 import us.hyperpvp.game.map.team.TeamColor;
+import us.hyperpvp.game.map.team.TeamMap;
 import us.hyperpvp.thread.misc.IThread;
+
+import java.sql.PreparedStatement;
+import java.util.Map.Entry;
 
 public class CycleThread extends IThread {
 
@@ -76,7 +75,6 @@ public class CycleThread extends IThread {
 
 
 		try {
-
 			CraftServer craftServer = (CraftServer) Bukkit.getServer();
 			MinecraftServer server = craftServer.getServer();
 			server.setMotd(ChatColor.AQUA + "Cycling...");

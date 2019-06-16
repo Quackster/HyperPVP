@@ -354,19 +354,15 @@ public class BlockListener implements Listener {
 
 	@EventHandler
 	public void onBlockFromTo(BlockFromToEvent event) {
-
 		try {
-
 			if (!HyperPVP.hasMatchBeenAnnounced()) {
 				event.setCancelled(true);
 			}
 
 			if (HyperPVP.getMap().getType() == GameType.RTC) {
 
-				if (event.getBlock().getType() == Material.LAVA || event.getBlock().getType() == Material.STATIONARY_LAVA) {
-
+				if (event.getBlock().getType() == Material.LAVA) {
 					for (Region region : HyperPVP.getMap().getRegions(RegionType.RTC)) {
-
 						if (region.hasLocation(event.getBlock().getLocation()) && !region.hasLocation(event.getToBlock().getLocation())) {
 
 							TeamMap winningTeam = null;
@@ -393,13 +389,9 @@ public class BlockListener implements Listener {
 			}
 
 			if (HyperPVP.getMap().getType() == GameType.DTC) {
-
-				if (event.getBlock().getType() == Material.LAVA || event.getBlock().getType() == Material.STATIONARY_LAVA) {
-
+				if (event.getBlock().getType() == Material.LAVA) {
 					for (Region region : HyperPVP.getMap().getRegions(RegionType.DTC)) {
-
 						if (region.hasLocation(event.getBlock().getLocation()) && !region.hasLocation(event.getToBlock().getLocation())) {
-
 							TeamMap winningTeam = null;
 							Session leaker = null;
 

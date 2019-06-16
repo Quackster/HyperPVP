@@ -17,6 +17,7 @@ package us.hyperpvp.misc;
 
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
+import org.bukkit.Material;
 
 public class Helpers {
 
@@ -27,69 +28,68 @@ public class Helpers {
 	public static int INVINCIBLE_TIMER = 10;
 	public static int COMBAT_LOG_TIMER = 5;
 	
-	public static DyeColor getDye(Color colour) {
-		
+	public static Material getDye(Color colour) {
 		if (colour == Color.AQUA) {
-			return DyeColor.CYAN;
+			return Material.CYAN_WOOL;
 		}
 		
 		if (colour == Color.BLUE) {
-			return DyeColor.BLUE;
+			return Material.BLUE_WOOL;
 		}
 		
 		if (colour == Color.BLACK) {
-			return DyeColor.BLACK;
+			return Material.BLACK_WOOL;
 		}
 		
 		if (colour == Color.FUCHSIA) {
-			return DyeColor.PINK;
+			return Material.PINK_WOOL;
 		}
 		
 		if (colour == Color.GRAY) {
-			return DyeColor.GRAY;
+			return Material.GRAY_WOOL;
 		}
 		
 		if (colour == Color.LIME) {
-			return DyeColor.LIME;
+			return Material.LIME_WOOL;
 		}
 		
 		if (colour == Color.MAROON) {
-			return DyeColor.RED;
+			return Material.RED_WOOL;
 		}
 		
 		if (colour == Color.NAVY) {
-			return DyeColor.BLUE;
+			return Material.BLUE_WOOL;
 		}
 		
 		if (colour == Color.OLIVE) {
-			return DyeColor.GREEN;
+			return Material.GREEN_WOOL;
 		}
 		
 		if (colour == Color.ORANGE) {
-			return DyeColor.ORANGE;
+			return Material.ORANGE_WOOL;
 		}
 		
 		if (colour == Color.PURPLE) {
-			return DyeColor.PURPLE;
+			return Material.PURPLE_WOOL;
 		}
 		
 		if (colour == Color.RED) {
-			return DyeColor.RED;
+			return Material.RED_WOOL;
 		}
 		
 		if (colour == Color.SILVER) {
-			return DyeColor.GRAY;
+			return Material.GRAY_WOOL;
 		}
 		
 		if (colour == Color.TEAL) {
-			return DyeColor.CYAN;
+			return Material.CYAN_WOOL;
 		}
 		
 		if (colour == Color.WHITE) {
-			return DyeColor.WHITE;
+			return Material.WHITE_WOOL;
 		}
 		
-		return DyeColor.YELLOW;
+		return Material.YELLOW_WOOL;
 		
 	}
 }

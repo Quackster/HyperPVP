@@ -165,7 +165,6 @@ public class HyperPVP extends JavaPlugin {
 	}
 	
 	public static void resetScoreboard() {
-		
 		scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
 
 		for (Player player : Bukkit.getOnlinePlayers()) {
@@ -200,9 +199,7 @@ public class HyperPVP extends JavaPlugin {
 	}
 
 	public boolean initalizeMySQL(boolean clear, boolean SQLite) {
-
 		try {
-
 			if (SQLite) {
 				File file = new File(this.getDataFolder(), "hyperpvp.db");
 				
@@ -301,10 +298,6 @@ public class HyperPVP extends JavaPlugin {
 		}else {
 			player.setPlayerListName(color + player.getName());
 		}
-	}
-
-	public static HyperPVP getJavaPlugin() {
-		return plugin;
 	}
 
 	public static Game getGame() {
