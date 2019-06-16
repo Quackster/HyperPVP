@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2019 at 07:16 AM
+-- Generation Time: Jun 16, 2019 at 07:34 AM
 -- Server version: 10.3.13-MariaDB
 -- PHP Version: 7.2.8
 
@@ -99,9 +99,11 @@ CREATE TABLE `users` (
   `uuid` varchar(255) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(255) NOT NULL DEFAULT '',
+  `salt` varchar(255) DEFAULT NULL,
+  `pin` varchar(255) DEFAULT NULL,
   `rank` int(11) NOT NULL DEFAULT 1,
   `last_online` bigint(255) NOT NULL DEFAULT 0,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `kills` int(11) NOT NULL DEFAULT 0,
   `deaths` int(11) NOT NULL DEFAULT 0,
   `won_match` tinyint(1) NOT NULL DEFAULT 0,
@@ -117,8 +119,8 @@ CREATE TABLE `users` (
 
 CREATE TABLE `users_friendrequest` (
   `id` int(11) NOT NULL,
-  `to` varchar(20) NOT NULL,
-  `from` varchar(20) NOT NULL
+  `sender` varchar(20) NOT NULL,
+  `receiver` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -129,8 +131,8 @@ CREATE TABLE `users_friendrequest` (
 
 CREATE TABLE `users_friends` (
   `id` int(11) NOT NULL,
-  `user` varchar(250) NOT NULL,
-  `friend` varchar(250) NOT NULL
+  `sender` varchar(250) NOT NULL,
+  `receiver` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -215,7 +217,7 @@ ALTER TABLE `servers`
 -- AUTO_INCREMENT for table `servers_users`
 --
 ALTER TABLE `servers_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
