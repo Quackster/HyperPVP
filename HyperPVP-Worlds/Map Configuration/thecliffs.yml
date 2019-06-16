@@ -1,0 +1,89 @@
+Settings:
+  World: thecliffs
+  Name: The Cliffs
+  Mode: DTM
+  X: -1.0
+  Y: 99.0
+  Z: -42.0
+  Minutes: 15
+  MaxPerTeam: '10'
+  Features:
+  - ''
+  Authors:
+  - Quackdot
+  Teams:
+  - DARK_RED
+  - BLUE
+  Spawns:
+  - BLUE,14,66,15
+  - DARK_RED,-13,66,-95
+  Items:
+  - IRON_SWORD,1
+  - BOW,1|ARROW_INFINITE,1
+  - IRON_AXE,1
+  - DIAMOND_PICKAXE,1
+  - LOG,64
+  - GLASS,64
+  - COOKED_BEEF,12
+  - GOLDEN_APPLE,3
+  - ARROW,1
+  Regions:
+    '1':
+      TeamWhitelist: 
+      - BLUE
+      Blocks: ''
+      Alert: You cannot enter the blue teams base.
+      Type: TEAM
+      MaxX: 17
+      MaxY: 71
+      MaxZ: 20
+      MinX: 9
+      MinY: 64
+      MinZ: 7
+    '2':
+      TeamWhitelist: 
+      - DARK_RED
+      Blocks: ''
+      Alert: You cannot enter the red teams base.
+      Type: TEAM
+      MaxX: -9
+      MaxY: 71
+      MaxZ: -88
+      MinX: -17
+      MinY: 64
+      MinZ: -102
+    '3':
+      TeamWhitelist: ''
+      Blocks: ''
+      Alert: You have reached the end of the map.
+      Type: MAP
+      MaxX: 201
+      MaxY: 117
+      MaxZ: 201
+      MinX: -201
+      MinY: -10001
+      MinZ: -201
+    '4':
+      TeamWhitelist: 
+      - DARK_RED
+      Blocks: ''
+      Alert: ''
+      Type: DTM
+      MaxX: -6
+      MaxY: 73
+      MaxZ: -77
+      MinX: -8
+      MinY: 69
+      MinZ: -79
+    '5':
+      TeamWhitelist: 
+      - BLUE
+      Blocks: ''
+      Alert: ''
+      Type: DTM
+      MaxX: 8
+      MaxY: 73
+      MaxZ: -2
+      MinX: 6
+      MinY: 69
+      MinZ: -4

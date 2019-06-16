@@ -1,0 +1,91 @@
+Settings:
+  World: thecoldwar
+  Name: The Cold War
+  Mode: DTC
+  X: 63
+  Y: 60
+  Z: -78
+  Minutes: 20
+  MaxPerTeam: '10'
+  Features:
+  - deadlysnowball
+  Authors:
+  - Quackdot
+  Teams:
+  - BLUE
+  - DARK_RED
+  Spawns:
+  - DARK_RED,146,63,-51
+  - BLUE,-2,65,12
+  Items:
+  - STONE_SWORD,1
+  - BOW,1
+  - IRON_AXE,1
+  - STONE_PICKAXE,1
+  - SNOW_BALL,16
+  - SNOW_BALL,16
+  - LOG,64
+  - GLASS,64
+  - COOKED_BEEF,12
+  - GOLDEN_APPLE,3
+  - ARROW,64
+  Regions:
+    '1':
+      TeamWhitelist: ''
+      Blocks: ''
+      Alert: You have reached the end of the map.
+      Type: MAP
+      MaxX: -28
+      MaxY: 87
+      MaxZ: -100
+      MinX: 170
+      MinY: -900001
+      MinZ: 38
+    '2':
+      TeamWhitelist: 
+      - DARK_RED
+      Blocks: ''
+      Alert: You cannot enter red teams spawn.
+      Type: TEAM
+      MaxX: 150
+      MaxY: 67
+      MaxZ: -57
+      MinX: 141
+      MinY: 62
+      MinZ: -45
+    '3':
+      TeamWhitelist: 
+      - BLUE
+      Blocks: ''
+      Alert: You cannot enter blue teams spawn.
+      Type: TEAM
+      MaxX: 7
+      MaxY: 69
+      MaxZ: 17
+      MinX: 20
+      MinY: 64
+      MinZ: 5
+    '4':
+      TeamWhitelist: 
+      - BLUE
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: 32
+      MaxY: 52
+      MaxZ: -32
+      MinX: 28
+      MinY: 48
+      MinZ: -28
+    '5':
+      TeamWhitelist:
+      - DARK_RED
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: 115
+      MaxY: 52
+      MaxZ: -12
+      MinX: 111
+      MinY: 48
+      MinZ: -8

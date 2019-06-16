@@ -1,0 +1,80 @@
+Settings:
+  World: shroomville
+  Name: Shroom Ville
+  Mode: DTC
+  X: -34.0
+  Y: 86.0
+  Z: 43.0
+  Minutes: 15
+  MaxPerTeam: '10'
+  Features:
+  - ''
+  Authors:
+  - Quackdot
+  Teams:
+  - GREEN
+  - YELLOW
+  Spawns:
+  - GREEN,27,79,97
+  - YELLOW,-5,79,-11
+  Items: []
+  Regions:
+    '1':
+      TeamWhitelist: ''
+      Blocks: ''
+      Alert: ''
+      Type: MAP
+      MaxX: 49
+      MaxY: 124
+      MaxZ: 121
+      MinX: -41
+      MinY: -1000000
+      MinZ: -37
+    '2':
+      TeamWhitelist: 
+      - GREEN
+      Blocks: ''
+      Alert: You cannot enter the green teams spawn.
+      Type: TEAM
+      MaxX: 31
+      MaxY: 83
+      MaxZ: 101
+      MinX: 15
+      MinY: 77
+      MinZ: 92
+    '3':
+      TeamWhitelist: 
+      - YELLOW
+      Blocks: ''
+      Alert: You cannot enter the yellow teams spawn.
+      Type: TEAM
+      MaxX: 5
+      MaxY: 83
+      MaxZ: -7
+      MinX: -11
+      MinY: 77
+      MinZ: -16
+    '4':
+      TeamWhitelist: 
+      - YELLOW
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: -6
+      MaxY: 88
+      MaxZ: 16
+      MinX: -12
+      MinY: 83
+      MinZ: 10
+    '5':
+      TeamWhitelist: 
+      - GREEN
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: 32
+      MaxY: 88
+      MaxZ: 75
+      MinX: 26
+      MinY: 83
+      MinZ: 69

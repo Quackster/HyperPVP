@@ -1,0 +1,114 @@
+Settings:
+  World: egypt
+  Name: Sands of Egypt
+  Mode: DTC
+  X: -48.0
+  Y: 64.0
+  Z: 86.0
+  Minutes: 60
+  MaxPerTeam: '20'
+  Features:
+  - specialtntplace
+  Authors:
+  - Quackdot
+  Teams:
+  - BLUE
+  - DARK_RED
+  Spawns:
+  - DARK_RED,-20,47,16
+  - BLUE,27,47,160
+  Items:
+  - IRON_SWORD,1
+  - BOW,1|ARROW_INFINITE,1
+  - IRON_PICKAXE,1
+  - TNT,2
+  - LOG,64
+  - GLASS,64
+  - COOKED_BEEF,32
+  - GOLDEN_APPLE,3
+  - ARROW,1
+  Regions:
+    '1':
+      Blocks: ''
+      Alert: You have reached the end of the map.
+      Type: MAP
+      MaxX: 201
+      MaxY: 109
+      MaxZ: 201
+      MinX: -201
+      MinY: -10001
+      MinZ: -201
+    '2':
+      TeamWhitelist:
+      - DARK_RED
+      Blocks: ''
+      Alert: You cannot enter red teams spawn
+      Type: TEAM
+      MaxX: -15
+      MaxY: 52
+      MaxZ: 22
+      MinX: -27
+      MinY: 43
+      MinZ: 9
+    '3':
+      TeamWhitelist: 
+      - BLUE
+      Blocks: ''
+      Alert: ''
+      Type: TEAM
+      MaxX: 33
+      MaxY: 52
+      MaxZ: 166
+      MinX: 22
+      MinY: 42
+      MinZ: 154
+    '4':
+      TeamWhitelist: 
+      - BLUE
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: 10
+      MaxY: 64
+      MaxZ: 134
+      MinX: 4
+      MinY: 58
+      MinZ: 128
+    '5':
+      TeamWhitelist:
+      - DARK_RED
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: 2
+      MaxY: 64
+      MaxZ: 48
+      MinX: -4
+      MinY: 58
+      MinZ: 42
+    '6':
+      TeamWhitelist:
+      - BLUE
+      Blocks:
+      - TNT
+      Alert: ''
+      Type: BLOCK_PLACE_DESTORY
+      MaxX: -27
+      MaxY: 1000
+      MaxZ: 166
+      MinX: 33
+      MinY: -9001
+      MinZ: 106
+    '7':
+      TeamWhitelist:
+      - DARK_RED
+      Blocks:
+      - TNT
+      Alert: ''
+      Type: BLOCK_PLACE_DESTORY
+      MaxX: 33
+      MaxY: 1000
+      MaxZ: 10
+      MinX: -27
+      MinY: -9001
+      MinZ: 70

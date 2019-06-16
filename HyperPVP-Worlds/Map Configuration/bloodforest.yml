@@ -1,0 +1,110 @@
+Settings:
+  World: bloodforest
+  Name: Blood Forest
+  Mode: DTC
+  X: 18.0
+  Y: 56.0
+  Z: 34.0
+  Minutes: 30
+  MaxPerTeam: '10'
+  Features:
+  - 'poisonarrows'
+  Authors:
+  - Quackdot
+  Teams:
+  - BLUE
+  - DARK_RED
+  Spawns:
+  - BLUE,105,20,38
+  - DARK_RED,-65,20,32
+  Items:
+  - IRON_SWORD,1
+  - BOW,1|ARROW_INFINITE,1
+  - LOG,64
+  - COOKED_BEEF,32
+  - GOLDEN_APPLE,3
+  - ARROW,1
+  Regions:
+    '1':
+      TeamWhitelist: ''
+      Blocks: ''
+      Alert: ''
+      Type: MAP
+      MaxX: 135
+      MaxY: 81
+      MaxZ: 105
+      MinX: -96
+      MinY: -100000
+      MinZ: -16
+    '2':
+      TeamWhitelist: 
+      - DARK_RED
+      Blocks: ''
+      Alert: You cannot enter the red teams base
+      Type: TEAM
+      MaxX: -57
+      MaxY: 25
+      MaxZ: 47
+      MinX: -76
+      MinY: 14
+      MinZ: 23
+    '3':
+      TeamWhitelist:
+      - BLUE
+      Blocks: ''
+      Alert: You cannot enter the blue teams base
+      Type: TEAM
+      MaxX: 115
+      MaxY: 25
+      MaxZ: 48
+      MinX: 96
+      MinY: 14
+      MinZ: 24
+    '4':
+      TeamWhitelist:
+      - BLUE
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: 73
+      MaxY: 32
+      MaxZ: 28
+      MinX: 66
+      MinY: 26
+      MinZ: 21
+    '5':
+      TeamWhitelist:
+      - DARK_RED
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: -27
+      MaxY: 32
+      MaxZ: 50
+      MinX: -34
+      MinY: 26
+      MinZ: 43
+    '6':
+      TeamWhitelist: ''
+      Blocks:
+      - CHEST
+      - WORKBENCH
+      Alert: ''
+      Type: BLOCK_PLACE_DESTORY
+      MaxX: 80
+      MaxY: 20
+      MaxZ: 61
+      MinX: 66
+      MinY: 7
+      MinZ: 52
+    '7':
+      TeamWhitelist: ''
+      Blocks: ''
+      Alert: ''
+      Type: BLOCK_PLACE_DESTORY
+      MaxX: -27
+      MaxY: 20
+      MaxZ: 22
+      MinX: -43
+      MinY: 4
+      MinZ: 10

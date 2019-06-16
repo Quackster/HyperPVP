@@ -1,0 +1,48 @@
+author: Quackster
+main: us.hyperpvp.HyperPVP
+name: HyperPVP
+version: '0.1'
+
+commands:
+   join:
+      description: Joins the game
+      usage: /<command>
+   spectate:
+      description: Leaves the game
+      usage: /<command>
+   register:
+      description: Makes a PIN code for the website
+      usage: /<command> [email] [password]
+   pin:
+      description: Reveals the PIN code if you forgot it.
+      usage: /<command>
+   cycle:
+      description: Cycles next map
+      usage: /<command> [worldname]
+   score:
+      description: Increase team score
+      usage: /<command>
+   status:
+      description: Checks status for creating new threads, etc
+      usage: /<command>
+   t:
+      aliases: teamchat,tchat
+      description: Team chat
+      usage: /<command> [message]
+   report:
+      description: Reloads HyperPVP's setttings
+      usage: /<command> <player> [message]
+   matchinfo:
+      description: Gets the current match information.
+      usage: /<command>
+      
+permissions:
+   hyperpvp.seereports:
+     description: Allows you to see reports from other members
+     default: false
+   hyperpvp.anyteam:
+     description: Allows you to join any team
+     default: false
+   hyperpvp.fullteam:
+     description: Allows you to join full teams
+     default: false

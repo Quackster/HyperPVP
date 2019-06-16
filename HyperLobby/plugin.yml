@@ -1,0 +1,15 @@
+name: HyperLobby
+author: Quackster
+version: 0.1
+main: pvp.alexdev.org.HyperPVP
+
+commands:
+   subscribe:
+      description: Testing command, shhhh
+      usage: /<command>
+   register:
+      description: Allows users to receieve pin number for our website
+      usage: /<command>
+   pin:
+      description: Used to retreive pin number if user forgets
+      usage: /<command>

@@ -1,0 +1,91 @@
+Settings:
+  World: lonelyforest
+  Name: Lonely Forest
+  Mode: DTC
+  X: -8.0
+  Y: 87.0
+  Z: 12.0
+  Minutes: 20
+  MaxPerTeam: '10'
+  Features:
+  - ''
+  Authors:
+  - Quackdot
+  Teams:
+  - BLUE
+  - DARK_RED
+  Spawns:
+  - BLUE,-62,90,13
+  - DARK_RED,47,90,13
+  Items:
+  - IRON_SWORD,1
+  - BOW,1|ARROW_INFINITE,1
+  - IRON_AXE,1
+  - IRON_PICKAXE,1
+  - LOG,64
+  - GLASS,64
+  - COOKED_BEEF,12
+  - GOLDEN_APPLE,3
+  - ARROW,1
+  - DIAMOND_BLOCK,4
+  - IRON_BLOCK,1
+  Regions:
+    '1':
+      TeamWhitelist: ''
+      Blocks: ''
+      Alert: You have reached the end of the map.
+      Type: MAP
+      MaxX: 77
+      MaxY: 123
+      MaxZ: 50
+      MinX: -89
+      MinY: -90002
+      MinZ: -37
+    '2':
+      TeamWhitelist: 
+      - BLUE
+      Blocks: ''
+      Alert: You may not enter the blue teams spawn
+      Type: TEAM
+      MaxX: -57
+      MaxY: 94
+      MaxZ: 17
+      MinX: -68
+      MinY: 85
+      MinZ: 9
+    '3':
+      TeamWhitelist:
+      - DARK_RED
+      Blocks: ''
+      Alert: You may not enter red teams spawn.
+      Type: TEAM
+      MaxX: 51
+      MaxY: 94
+      MaxZ: 17
+      MinX: 40
+      MinY: 85
+      MinZ: 9
+    '4':
+      TeamWhitelist:
+      - BLUE
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: -29
+      MaxY: 101
+      MaxZ: 15
+      MinX: -33
+      MinY: 95
+      MinZ: 11
+    '5':
+      TeamWhitelist:
+      - DARK_RED
+      Blocks: ''
+      Alert: ''
+      Type: DTC
+      MaxX: 16
+      MaxY: 101
+      MaxZ: 15
+      MinX: 12
+      MinY: 95
+      MinZ: 11
